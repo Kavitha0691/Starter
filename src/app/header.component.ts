@@ -16,8 +16,8 @@ import { LanguageSelectorComponent } from './header/language-selector.component'
   ],
   template: `
     <header class="bg-white shadow-md">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-between">
+      <div class="container mx-auto px-4 py-3 sm:py-4">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
           <!-- Logo/Title -->
           <app-header-title></app-header-title>
 

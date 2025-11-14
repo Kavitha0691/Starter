@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
           <input
             type="text"
             placeholder="Search..."
-            class="outline-none text-gray-700 w-24 sm:w-32 md:w-48"
+            class="outline-none text-gray-700 w-24 sm:w-32 md:w-48 text-base"
             [value]="searchQuery()"
             (input)="searchQuery.set($any($event.target).value)"
             (keyup.enter)="onSearch()"
