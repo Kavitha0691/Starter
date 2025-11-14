@@ -1,52 +1,20 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-interface Language {
-  name: string;
-  flag: string;
-  code: string;
-}
+import { Component } from '@angular/core';
+import { HeaderTitleComponent } from './header/header-title.component';
+import { SearchComponent } from './header/search.component';
+import { CartComponent } from './header/cart.component';
+import { LoginComponent } from './header/login.component';
+import { LanguageSelectorComponent } from './header/language-selector.component';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule],
+  imports: [
+    HeaderTitleComponent,
+    SearchComponent,
+    CartComponent,
+    LoginComponent,
+    LanguageSelectorComponent
+  ],
   templateUrl: './header.component.html',
   standalone: true
 })
-export class HeaderComponent {
-  selectedLanguage = signal<Language | null>(null);
-  isDropdownOpen = signal(false);
-  isSearchOpen = signal(false);
-  searchQuery = signal('');
-
-  languages: Language[] = [
-    { name: 'English', flag: 'https://flagcdn.com/w40/gb.png', code: 'en' },
-    { name: 'Swedish', flag: 'https://flagcdn.com/w40/se.png', code: 'sv' }
-  ];
-
-  toggleDropdown() {
-    this.isDropdownOpen.update(value => !value);
-  }
-
-  toggleSearch() {
-    this.isSearchOpen.update(value => !value);
-    if (!this.isSearchOpen()) {
-      this.searchQuery.set('');
-    }
-  }
-
-  selectLanguage(language: Language) {
-    this.selectedLanguage.set(language);
-    this.isDropdownOpen.set(false);
-  }
-
-  onSearch() {
-    console.log('Search query:', this.searchQuery());
-    // Implement search functionality here
-  }
-
-  onLogin() {
-    console.log('Login clicked');
-    // Implement login functionality here
-  }
-}
+export class HeaderComponent {}
