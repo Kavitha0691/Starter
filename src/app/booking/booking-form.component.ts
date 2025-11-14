@@ -5,15 +5,15 @@ import { CommonModule } from '@angular/common';
   selector: 'app-booking-form',
   imports: [CommonModule],
   template: `
-    <div class="bg-white shadow-lg rounded-lg p-6 -mt-8 relative z-10">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-white shadow-2xl rounded-2xl p-6 sm:p-8 -mt-6 relative z-10 border border-gray-100">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <!-- Destination -->
         <div class="space-y-2">
-          <label class="text-sm font-medium text-gray-700">Choose destination</label>
+          <label class="text-xs font-semibold text-gray-600 uppercase tracking-wide">Choose destination</label>
           <select
             [value]="destination()"
             (change)="destination.set($any($event.target).value)"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all bg-gray-50 hover:bg-white text-base font-medium"
           >
             <option value="">Where do you want to live?</option>
             <option value="are">Åre</option>
@@ -26,13 +26,13 @@ import { CommonModule } from '@angular/common';
 
         <!-- Guests -->
         <div class="space-y-2">
-          <label class="text-sm font-medium text-gray-700">Add guests</label>
+          <label class="text-xs font-semibold text-gray-600 uppercase tracking-wide">Add guests</label>
           <div class="relative">
             <button
               (click)="toggleGuestSelector()"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-left flex items-center justify-between"
+              class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all text-left flex items-center justify-between bg-gray-50 hover:bg-white"
             >
-              <span class="text-gray-700">{{ guestsDisplay() }}</span>
+              <span class="text-gray-800 font-medium">{{ guestsDisplay() }}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 text-gray-400"
@@ -51,21 +51,21 @@ import { CommonModule } from '@angular/common';
             </button>
 
             @if (isGuestSelectorOpen()) {
-              <div class="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-20">
-                <div class="space-y-3">
+              <div class="absolute top-full mt-2 w-full bg-white border-2 border-gray-200 rounded-xl shadow-2xl p-5 z-20">
+                <div class="space-y-4">
                   <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-700">Adults</span>
+                    <span class="text-sm font-semibold text-gray-700">Adults</span>
                     <div class="flex items-center space-x-3">
                       <button
                         (click)="decrementAdults()"
-                        class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100"
+                        class="w-9 h-9 flex items-center justify-center rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors font-bold"
                       >
                         -
                       </button>
-                      <span class="w-8 text-center font-medium">{{ adults() }}</span>
+                      <span class="w-10 text-center font-bold text-lg">{{ adults() }}</span>
                       <button
                         (click)="incrementAdults()"
-                        class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100"
+                        class="w-9 h-9 flex items-center justify-center rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors font-bold"
                       >
                         +
                       </button>
@@ -73,18 +73,18 @@ import { CommonModule } from '@angular/common';
                   </div>
 
                   <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-700">Children</span>
+                    <span class="text-sm font-semibold text-gray-700">Children</span>
                     <div class="flex items-center space-x-3">
                       <button
                         (click)="decrementChildren()"
-                        class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100"
+                        class="w-9 h-9 flex items-center justify-center rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors font-bold"
                       >
                         -
                       </button>
-                      <span class="w-8 text-center font-medium">{{ children() }}</span>
+                      <span class="w-10 text-center font-bold text-lg">{{ children() }}</span>
                       <button
                         (click)="incrementChildren()"
-                        class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100"
+                        class="w-9 h-9 flex items-center justify-center rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors font-bold"
                       >
                         +
                       </button>
@@ -98,21 +98,21 @@ import { CommonModule } from '@angular/common';
 
         <!-- Arrival Date -->
         <div class="space-y-2">
-          <label class="text-sm font-medium text-gray-700">Select arrival day</label>
+          <label class="text-xs font-semibold text-gray-600 uppercase tracking-wide">Select arrival day</label>
           <input
             type="date"
             [value]="arrivalDate()"
             (change)="arrivalDate.set($any($event.target).value)"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all bg-gray-50 hover:bg-white text-base font-medium"
             placeholder="Arrival day"
           />
         </div>
 
         <!-- Search Button -->
-        <div class="flex items-end">
+        <div class="flex items-end lg:col-span-2">
           <button
             (click)="search()"
-            class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors flex items-center justify-center space-x-2"
+            class="w-full px-6 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
