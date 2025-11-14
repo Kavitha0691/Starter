@@ -1,0 +1,95 @@
+<header class="bg-white shadow-md">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo/Title -->
+      <div class="flex items-center">
+        <h1 class="text-2xl font-bold text-gray-800">Starter</h1>
+      </div>
+
+      <!-- Right side: Cart and Language -->
+      <div class="flex items-center space-x-6">
+        <!-- Cart Icon -->
+        <button class="relative hover:text-blue-600 transition-colors" aria-label="Shopping cart">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-gray-700 hover:text-blue-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+          <!-- Cart badge (optional) -->
+          <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            0
+          </span>
+        </button>
+
+        <!-- Language Dropdown -->
+        <div class="relative">
+          <button
+            (click)="toggleDropdown()"
+            class="flex items-center space-x-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            aria-label="Select language"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-gray-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+              />
+            </svg>
+            <span class="text-gray-700 font-medium">{{ selectedLanguage() }}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-gray-700 transition-transform"
+              [class.rotate-180]="isDropdownOpen()"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          @if (isDropdownOpen()) {
+            <div class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+              <ul class="py-1">
+                @for (language of languages; track language) {
+                  <li>
+                    <button
+                      (click)="selectLanguage(language)"
+                      class="w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors"
+                      [class.bg-blue-100]="selectedLanguage() === language"
+                      [class.font-semibold]="selectedLanguage() === language"
+                    >
+                      {{ language }}
+                    </button>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
