@@ -6,10 +6,87 @@
         <h1 class="text-2xl font-bold text-gray-800">Starter</h1>
       </div>
 
-      <!-- Right side: Cart and Language -->
-      <div class="flex items-center space-x-6">
+      <!-- Right side: Search, Cart, Language, and Login -->
+      <div class="flex items-center space-x-4">
+        <!-- Search -->
+        <div class="flex items-center">
+          @if (isSearchOpen()) {
+            <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 transition-all">
+              <input
+                type="text"
+                placeholder="Search..."
+                class="bg-transparent outline-none text-gray-700 w-48"
+                [value]="searchQuery()"
+                (input)="searchQuery.set($any($event.target).value)"
+                (keyup.enter)="onSearch()"
+              />
+              <button
+                (click)="onSearch()"
+                class="ml-2 text-gray-600 hover:text-blue-600"
+                aria-label="Search"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+              <button
+                (click)="toggleSearch()"
+                class="ml-1 text-gray-600 hover:text-red-600"
+                aria-label="Close search"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          } @else {
+            <button
+              (click)="toggleSearch()"
+              class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Open search"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-gray-700 hover:text-blue-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          }
+        </div>
+
         <!-- Cart Icon -->
-        <button class="relative hover:text-blue-600 transition-colors" aria-label="Shopping cart">
+        <button class="relative p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Shopping cart">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 text-gray-700 hover:text-blue-600"
@@ -24,8 +101,8 @@
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
-          <!-- Cart badge (optional) -->
-          <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+          <!-- Cart badge -->
+          <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
             0
           </span>
         </button>
@@ -34,27 +111,29 @@
         <div class="relative">
           <button
             (click)="toggleDropdown()"
-            class="flex items-center space-x-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            class="flex items-center space-x-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
             aria-label="Select language"
           >
-            <!-- Globe icon -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-700"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-              />
-            </svg>
-            <!-- Show language text only if selected -->
             @if (selectedLanguage()) {
-              <span class="text-gray-700 font-medium">{{ selectedLanguage() }}</span>
+              <!-- Show selected language flag and name -->
+              <span class="text-xl">{{ selectedLanguage()!.flag }}</span>
+              <span class="text-gray-700 font-medium">{{ selectedLanguage()!.name }}</span>
+            } @else {
+              <!-- Show globe icon when no language selected -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                />
+              </svg>
             }
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,17 +154,18 @@
 
           <!-- Dropdown Menu -->
           @if (isDropdownOpen()) {
-            <div class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+            <div class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
               <ul class="py-1">
-                @for (language of languages; track language) {
+                @for (language of languages; track language.code) {
                   <li>
                     <button
                       (click)="selectLanguage(language)"
-                      class="w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors"
-                      [class.bg-blue-100]="selectedLanguage() === language"
-                      [class.font-semibold]="selectedLanguage() === language"
+                      class="w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors flex items-center space-x-2"
+                      [class.bg-blue-100]="selectedLanguage()?.code === language.code"
+                      [class.font-semibold]="selectedLanguage()?.code === language.code"
                     >
-                      {{ language }}
+                      <span class="text-xl">{{ language.flag }}</span>
+                      <span>{{ language.name }}</span>
                     </button>
                   </li>
                 }
@@ -93,6 +173,29 @@
             </div>
           }
         </div>
+
+        <!-- Login Button -->
+        <button
+          (click)="onLogin()"
+          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center space-x-2"
+          aria-label="Login"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+            />
+          </svg>
+          <span>Login</span>
+        </button>
       </div>
     </div>
   </div>
