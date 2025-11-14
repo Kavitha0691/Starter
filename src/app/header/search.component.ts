@@ -7,23 +7,23 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="flex items-center">
       @if (isSearchOpen()) {
-        <div class="flex items-center border border-gray-300 rounded-lg px-3 py-2 transition-all">
+        <div class="flex items-center border border-gray-300 rounded-lg px-2 sm:px-3 py-2 transition-all">
           <input
             type="text"
             placeholder="Search..."
-            class="outline-none text-gray-700 w-48"
+            class="outline-none text-gray-700 w-24 sm:w-32 md:w-48"
             [value]="searchQuery()"
             (input)="searchQuery.set($any($event.target).value)"
             (keyup.enter)="onSearch()"
           />
           <button
             (click)="onSearch()"
-            class="ml-2 text-gray-600 hover:text-blue-600 transition-colors"
+            class="ml-1 sm:ml-2 text-gray-600 hover:text-blue-600 transition-colors"
             aria-label="Search"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
+              class="h-4 w-4 sm:h-5 sm:w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -43,7 +43,7 @@ import { CommonModule } from '@angular/common';
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
+              class="h-4 w-4 sm:h-5 sm:w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

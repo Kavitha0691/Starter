@@ -11,12 +11,9 @@ interface Language {
   selector: 'app-language-selector',
   imports: [CommonModule],
   template: `
-    <div
-      class="relative"
-      (mouseenter)="openDropdown()"
-      (mouseleave)="closeDropdown()"
-    >
+    <div class="relative">
       <button
+        (click)="toggleDropdown()"
         class="flex items-center space-x-2 p-2 transition-colors group"
         aria-label="Select language"
       >
@@ -98,12 +95,8 @@ export class LanguageSelectorComponent {
     { name: 'Swedish', flag: 'https://flagcdn.com/w40/se.png', code: 'sv' }
   ];
 
-  openDropdown() {
-    this.isDropdownOpen.set(true);
-  }
-
-  closeDropdown() {
-    this.isDropdownOpen.set(false);
+  toggleDropdown() {
+    this.isDropdownOpen.update(value => !value);
   }
 
   selectLanguage(language: Language) {
