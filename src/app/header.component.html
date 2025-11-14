@@ -7,22 +7,22 @@
       </div>
 
       <!-- Right side: Search, Cart, Language, and Login -->
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-2">
         <!-- Search -->
         <div class="flex items-center">
           @if (isSearchOpen()) {
-            <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 transition-all">
+            <div class="flex items-center border border-gray-300 rounded-lg px-3 py-2 transition-all">
               <input
                 type="text"
                 placeholder="Search..."
-                class="bg-transparent outline-none text-gray-700 w-48"
+                class="outline-none text-gray-700 w-48"
                 [value]="searchQuery()"
                 (input)="searchQuery.set($any($event.target).value)"
                 (keyup.enter)="onSearch()"
               />
               <button
                 (click)="onSearch()"
-                class="ml-2 text-gray-600 hover:text-blue-600"
+                class="ml-2 text-gray-600 hover:text-blue-600 transition-colors"
                 aria-label="Search"
               >
                 <svg
@@ -42,7 +42,7 @@
               </button>
               <button
                 (click)="toggleSearch()"
-                class="ml-1 text-gray-600 hover:text-red-600"
+                class="ml-1 text-gray-600 hover:text-red-600 transition-colors"
                 aria-label="Close search"
               >
                 <svg
@@ -64,7 +64,7 @@
           } @else {
             <button
               (click)="toggleSearch()"
-              class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              class="p-2 transition-colors"
               aria-label="Open search"
             >
               <svg
@@ -86,7 +86,7 @@
         </div>
 
         <!-- Cart Icon -->
-        <button class="relative p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Shopping cart">
+        <button class="relative p-2 transition-colors" aria-label="Shopping cart">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 text-gray-700 hover:text-blue-600"
@@ -102,7 +102,7 @@
             />
           </svg>
           <!-- Cart badge -->
-          <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">
             0
           </span>
         </button>
@@ -111,18 +111,21 @@
         <div class="relative">
           <button
             (click)="toggleDropdown()"
-            class="flex items-center space-x-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            class="flex items-center space-x-2 p-2 transition-colors"
             aria-label="Select language"
           >
             @if (selectedLanguage()) {
-              <!-- Show selected language flag and name -->
-              <span class="text-xl">{{ selectedLanguage()!.flag }}</span>
-              <span class="text-gray-700 font-medium">{{ selectedLanguage()!.name }}</span>
+              <!-- Show selected language flag -->
+              <img
+                [src]="selectedLanguage()!.flag"
+                [alt]="selectedLanguage()!.name"
+                class="w-6 h-6 rounded-full object-cover border border-gray-300"
+              />
             } @else {
               <!-- Show globe icon when no language selected -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-700"
+                class="h-6 w-6 text-gray-700 hover:text-blue-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -160,11 +163,15 @@
                   <li>
                     <button
                       (click)="selectLanguage(language)"
-                      class="w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors flex items-center space-x-2"
+                      class="w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors flex items-center space-x-3"
                       [class.bg-blue-100]="selectedLanguage()?.code === language.code"
                       [class.font-semibold]="selectedLanguage()?.code === language.code"
                     >
-                      <span class="text-xl">{{ language.flag }}</span>
+                      <img
+                        [src]="language.flag"
+                        [alt]="language.name"
+                        class="w-6 h-6 rounded-full object-cover border border-gray-300"
+                      />
                       <span>{{ language.name }}</span>
                     </button>
                   </li>
@@ -177,12 +184,12 @@
         <!-- Login Button -->
         <button
           (click)="onLogin()"
-          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center space-x-2"
+          class="p-2 transition-colors flex items-center"
           aria-label="Login"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
+            class="h-6 w-6 text-gray-700 hover:text-blue-600"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -194,7 +201,6 @@
               d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
             />
           </svg>
-          <span>Login</span>
         </button>
       </div>
     </div>

@@ -20,8 +20,8 @@ export class HeaderComponent {
   searchQuery = signal('');
 
   languages: Language[] = [
-    { name: 'English', flag: '🇬🇧', code: 'en' },
-    { name: 'Swedish', flag: '🇸🇪', code: 'sv' }
+    { name: 'English', flag: 'https://flagcdn.com/w40/gb.png', code: 'en' },
+    { name: 'Swedish', flag: 'https://flagcdn.com/w40/se.png', code: 'sv' }
   ];
 
   toggleDropdown() {
