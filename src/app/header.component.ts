@@ -28,6 +28,14 @@ export class HeaderComponent {
     this.isDropdownOpen.update(value => !value);
   }
 
+  openDropdown() {
+    this.isDropdownOpen.set(true);
+  }
+
+  closeDropdown() {
+    this.isDropdownOpen.set(false);
+  }
+
   toggleSearch() {
     this.isSearchOpen.update(value => !value);
     if (!this.isSearchOpen()) {

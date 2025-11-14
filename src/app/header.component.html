@@ -131,10 +131,13 @@
         </button>
 
         <!-- Language Dropdown -->
-        <div class="relative">
+        <div
+          class="relative"
+          (mouseenter)="openDropdown()"
+          (mouseleave)="closeDropdown()"
+        >
           <button
-            (click)="toggleDropdown()"
-            class="flex items-center space-x-2 p-2 transition-colors"
+            class="flex items-center space-x-2 p-2 transition-colors group"
             aria-label="Select language"
           >
             @if (selectedLanguage()) {
@@ -142,13 +145,13 @@
               <img
                 [src]="selectedLanguage()!.flag"
                 [alt]="selectedLanguage()!.name"
-                class="w-6 h-6 rounded-full object-cover border border-gray-300"
+                class="w-6 h-6 rounded-full object-cover border border-gray-300 group-hover:border-blue-600"
               />
             } @else {
               <!-- Show globe icon when no language selected -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-gray-700 hover:text-blue-600"
+                class="h-6 w-6 text-gray-700 group-hover:text-blue-600 transition-colors"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -163,7 +166,7 @@
             }
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 text-gray-700 transition-transform"
+              class="h-4 w-4 text-gray-700 group-hover:text-blue-600 transition-all"
               [class.rotate-180]="isDropdownOpen()"
               fill="none"
               viewBox="0 0 24 24"
