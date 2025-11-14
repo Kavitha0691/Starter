@@ -5,7 +5,15 @@ import { HeaderComponent } from './header.component';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent],
-  templateUrl: './app.html',
+  template: `
+    <!-- Header Component -->
+    <app-header></app-header>
+
+    <!-- Main Content Area -->
+    <div class="min-h-screen bg-gray-50">
+      <router-outlet />
+    </div>
+  `,
   styleUrl: './app.scss'
 })
 export class App {
